@@ -38,11 +38,11 @@ func urlScan(url string, c chan string) { // Main urlScan function
 	elapsed := int(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
 	if err != nil {
 		fmt.Println("Error:", err)
-		c <- url // return result of scan the channel
+		u[url] = ScanResult{404, 0} // Set HTTP STATUS CODE TO 404 and elapsed to '0'
+		c <- url                    // return result of scan the channel
 		return
 	}
-	// fmt.Println("DEBUG: urlScan() -> resp result:", resp, "DEBUG:Duration in ms", elapsed, "Duration as string() is:", elapsed)
-	// Add URL to global 'u' map
-	u[url] = ScanResult{resp.StatusCode, elapsed}
-	c <- url // return result of scan the channel
+
+	u[url] = ScanResult{resp.StatusCode, elapsed} // Add URL to global 'u' map
+	c <- url                                      // return result of scan the channel
 }

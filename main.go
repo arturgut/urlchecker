@@ -12,8 +12,6 @@ func main() {
 
 	printVersion()                   // Print version
 	loadConfiguration("config.yaml") // load configuration
-
-	go scannerLoop() // Start URL scanner routines
-
-	startServer() // Start HTTP server
+	go scannerLoop()                 // Start URL scanner routines
+	startServer()                    // Start HTTP server
 }
