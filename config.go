@@ -24,7 +24,7 @@ type Config struct {
 var config Config
 
 func loadConfiguration(filename string) {
-
+	fmt.Println("INFO: Loading configuration...")
 	source, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -33,10 +33,6 @@ func loadConfiguration(filename string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("DEBUG: Config:", config.Server.Port)
-	fmt.Println("DEBUG: Config:", config.Client.SkipSSL)
-	fmt.Println("DEBUG: Config:", config.Client.Timeout)
-	for _, value := range config.Urls {
-		fmt.Println("DEBUG: Config:", value)
-	}
+	fmt.Println("INFO: Config has been sucessfully loaded.")
+	fmt.Println("DEBUG: Config:", config)
 }

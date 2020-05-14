@@ -34,3 +34,20 @@ urls: # <- Array of URL to check
   - http://amazon.com
   - http://ebay.com
 ```
+
+### Roadmap
+
+######0.1 
+
+* use Go routines to periodically check URL
+* implement Prometheus Go library to display metrics 
+* use log library to handle logs
+
+######0.2 
+* add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
+* add Dockerfile 
+* add CI/CD pipeline
+
+######0.3
+* * allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
+

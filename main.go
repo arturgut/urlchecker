@@ -1,12 +1,10 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // ScanResult - Create scan result struct
 type ScanResult struct {
-	responseCode int   // also known as status code
+	responseCode int   // also known as HTTP status code
 	durationInMs int64 // measured duration in ms
 }
 
@@ -17,10 +15,8 @@ func main() {
 	printVersion()                   // Print version
 	loadConfiguration("config.yaml") // load configuration
 
-	// Main loop. For each item scan URL.
-	for _, url := range config.Urls {
-		fmt.Println("\nDEBUG: main() => loop through url", url)
-		// Scan URL's
+	fmt.Println("INFO: Starting URL scanner")
+	for _, url := range config.Urls { // Main loop. For each item scan URL.
 		urlScan(url)
 	}
 
