@@ -4,7 +4,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -29,12 +28,18 @@ func scannerLoop() {
 func urlScan(url string, c chan string) { // Main urlScan function
 	fmt.Println("INFO: Starting URL scan", url)
 	start := time.Now() // Measure time taken to establish http connection
-	resp, err := http.Get(url)
+
+	client := &http.Client{
+		Timeout: config.Client.Timeout * time.Second,
+	}
+
+	resp, err := client.Get(url)
 	t := time.Now()                            // Measure time taken to establish http connection
 	elapsed := int(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
 	if err != nil {
 		fmt.Println("Error:", err)
-		os.Exit(1)
+		c <- url // return result of scan the channel
+		return
 	}
 	// fmt.Println("DEBUG: urlScan() -> resp result:", resp, "DEBUG:Duration in ms", elapsed, "Duration as string() is:", elapsed)
 	// Add URL to global 'u' map

@@ -2,10 +2,11 @@ server:
   port: 8091
 client: 
   skipSSL: true # This is currently broken
-  timeout: 30
+  timeout: 30 # http client timeout
   period: 5 # How often to scan a URL. In seconds.
 urls:
   - http://google.com
   - http://facebook.com
   - http://amazon.com
   - http://ebay.com
+  - http://fake.local
