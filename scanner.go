@@ -2,14 +2,15 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func scannerLoop() {
 
-	fmt.Println("INFO: Starting URL scanner")
+	log.Info("Starting URL scanner")
 
 	c := make(chan string)
 
@@ -26,7 +27,7 @@ func scannerLoop() {
 }
 
 func urlScan(url string, c chan string) { // Main urlScan function
-	fmt.Println("INFO: Starting URL scan", url)
+	log.Info("Starting URL scan for: ", url)
 	start := time.Now() // Measure time taken to establish http connection
 
 	client := &http.Client{
@@ -37,7 +38,7 @@ func urlScan(url string, c chan string) { // Main urlScan function
 	t := time.Now()                            // Measure time taken to establish http connection
 	elapsed := int(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Warn("This URL is unreachable from here! ", err)
 		u[url] = ScanResult{404, 0} // Set HTTP STATUS CODE TO 404 and elapsed to '0'
 		c <- url                    // return result of scan the channel
 		return

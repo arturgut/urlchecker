@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func metrics(w http.ResponseWriter, req *http.Request) {
@@ -16,9 +18,8 @@ func metrics(w http.ResponseWriter, req *http.Request) {
 }
 
 func startServer() {
-	fmt.Println("INFO: Starting HTTP server on port:", config.Server.Port, ".\n You should be able to access the URL at http://localhost:", config.Server.Port)
+	log.Info("INFO: Starting HTTP server on port:", config.Server.Port, ".\n You should be able to access the URL at http://localhost:", config.Server.Port)
 	http.HandleFunc("/metrics", metrics)
 	serverPort := ":" + strconv.FormatInt(int64(config.Server.Port), 10)
-	fmt.Println("Server port:", serverPort)
 	http.ListenAndServe(serverPort, nil)
 }

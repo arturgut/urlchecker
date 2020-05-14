@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"time"
 
+	log "github.com/sirupsen/logrus"
 	"gopkg.in/go-yaml/yaml.v2"
 )
 
@@ -26,15 +26,17 @@ type Config struct {
 var config Config
 
 func loadConfiguration(filename string) {
-	fmt.Println("INFO: Loading configuration...")
+	log.Info("INFO: Loading configuration...")
 	source, err := ioutil.ReadFile(filename)
 	if err != nil {
+		log.Error("An error occured: ", err)
 		panic(err)
 	}
 	err = yaml.Unmarshal(source, &config)
 	if err != nil {
+		log.Error("An error occured: ", err)
 		panic(err)
 	}
-	fmt.Println("INFO: Config has been sucessfully loaded.")
-	fmt.Println("DEBUG: Config:", config)
+	log.Info("Config has been sucessfully loaded.")
+	log.Debug("Config map: ", config)
 }
