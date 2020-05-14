@@ -1,5 +1,5 @@
 server: 
-  port: 9940
+  port: 8091
 client: 
   skipSSL: true # This is currently broken
   timeout: 30

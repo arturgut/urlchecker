@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 func metrics(w http.ResponseWriter, req *http.Request) {
@@ -15,7 +16,9 @@ func metrics(w http.ResponseWriter, req *http.Request) {
 }
 
 func startServer() {
-	fmt.Println("INFO: Starting HTTP server on port 8090.\n You should be able to access the URL at http://localhost:8090")
+	fmt.Println("INFO: Starting HTTP server on port:", config.Server.Port, ".\n You should be able to access the URL at http://localhost:", config.Server.Port)
 	http.HandleFunc("/metrics", metrics)
-	http.ListenAndServe(":8090", nil)
+	serverPort := ":" + strconv.FormatInt(int64(config.Server.Port), 10)
+	fmt.Println("Server port:", serverPort)
+	http.ListenAndServe(serverPort, nil)
 }
