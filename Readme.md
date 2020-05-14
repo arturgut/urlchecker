@@ -8,6 +8,18 @@ cd urlchecker
 git build *.go
 ```
 
+Expected output in Prometheus format:
+```
+curl http://localhost:8090/metrics
+# HELP Version: 0.1 Alpha - https://github.com/arturgut/urlchecker
+# HELP url_checker. Label: HTTP Response code. Value: Request duration in Ms
+url_checker{ url='http://ebay.com', http_status_code=200 } 529
+url_checker{ url='http://google.com', http_status_code=200 } 104
+url_checker{ url='http://facebook.com', http_status_code=200 } 520
+url_checker{ url='http://amazon.com', http_status_code=200 } 698
+```
+
+
 ### Configuration 
 The configuration is stored in a single `config.yaml` file
 ```
