@@ -40,6 +40,14 @@ urls:
   - http://fake.local # This is a fake one. Handy for testing
 ```
 
+Configuration with environment variables:
+```
+yaml:"loglevel" -------> envconfig:"URL_CHECKER_LOGLEVEL"
+yaml:"port" -------> envconfig:"URL_CHECKER_SERVER_PORT"
+yaml:"timeout" -------> envconfig:"URL_CHECKER_TIMEOUT"
+yaml:"period" -------> envconfig:"URL_CHECKER_PERIOD"
+```
+
 ---
 
 ### Roadmap
@@ -56,7 +64,7 @@ urls:
 
 ##### 0.2 
 
-* add Dockerfile 
+* *[Todo]* - add Dockerfile 
 * *[Todo]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
 
 
