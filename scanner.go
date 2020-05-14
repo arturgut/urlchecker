@@ -8,7 +8,25 @@ import (
 	"time"
 )
 
-func urlScan(url string) {
+func scannerLoop() {
+	c := make(chan string)
+
+	for _, url := range config.Urls { // Main loop. For each item initiate go routine
+		go urlScan(url, c)
+	}
+
+	// Infinite for loop to continusly scan URL listed in the channel 'c'
+	for l := range c {
+		go func(url string) {
+			fmt.Println("DEBUG: Within routine. Starting another urlScan(). URL:", url)
+			time.Sleep(2 * time.Second)
+			urlScan(url, c)
+		}(l)
+	}
+
+}
+
+func urlScan(url string, c chan string) {
 	fmt.Println("INFO: Starting URL scan", url)
 	start := time.Now() // Measure time taken to establish http connection
 	resp, err := http.Get(url)
@@ -21,4 +39,5 @@ func urlScan(url string) {
 	// fmt.Println("DEBUG: urlScan() -> resp result:", resp, "DEBUG:Duration in ms", elapsed, "Duration as string() is:", elapsed)
 	// Add URL to global 'u' map
 	u[url] = ScanResult{resp.StatusCode, elapsed}
+	c <- url // return result of scan the channel
 }
