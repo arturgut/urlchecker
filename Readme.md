@@ -50,15 +50,17 @@ urls:
 * *[Completed]* - Add http.client timeout 
 * *[Completed]* - Add dedicated log library
 * *[Completed]* - Add support for environment variables for port, log level, period
+* *[Todo]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
+
 
 
 ##### 0.2 
 
-* add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
 * add Dockerfile 
+* *[Todo]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
 
 
 ##### 0.3
-* *[Todo]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
+
 * *[Todo]* - add tests - https://github.com/stretchr/testify
 * *[Todo]* - command line attributes for port, log level 
