@@ -15,23 +15,20 @@ func scannerLoop() {
 		go urlScan(url, c)
 	}
 
-	// Infinite for loop to continusly scan URL listed in the channel 'c'
-	for l := range c {
+	for l := range c { // Infinite for loop to continusly scan URL listed in the channel 'c'
 		go func(url string) {
-			fmt.Println("DEBUG: Within routine. Starting another urlScan(). URL:", url)
-			time.Sleep(2 * time.Second)
+			time.Sleep(config.Client.Period * time.Second)
 			urlScan(url, c)
 		}(l)
 	}
-
 }
 
-func urlScan(url string, c chan string) {
+func urlScan(url string, c chan string) { // Main urlScan function
 	fmt.Println("INFO: Starting URL scan", url)
 	start := time.Now() // Measure time taken to establish http connection
 	resp, err := http.Get(url)
-	t := time.Now()                              // Measure time taken to establish http connection
-	elapsed := int64(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
+	t := time.Now()                            // Measure time taken to establish http connection
+	elapsed := int(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
