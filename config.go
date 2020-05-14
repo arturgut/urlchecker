@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"time"
 
 	"gopkg.in/go-yaml/yaml.v2"
 )
@@ -15,7 +16,8 @@ type Config struct {
 
 	Client struct {
 		SkipSSL bool
-		Timeout int
+		Timeout time.Duration
+		Period  time.Duration
 	}
 
 	Urls []string

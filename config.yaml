@@ -3,6 +3,7 @@ server:
 client: 
   skipSSL: true # This is currently broken
   timeout: 30
+  period: 5 # How often to scan a URL. In seconds.
 urls:
   - http://google.com
   - http://facebook.com
