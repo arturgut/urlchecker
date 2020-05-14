@@ -1,0 +1,11 @@
+server: 
+  port: 9940
+client: 
+  skipSSL: true # This is currently broken
+  timeout: 30
+urls:
+  - http://google.com
+  - http://facebook.com
+  - http://amazon.co.uk
+  - http://ebay.co.uk
+  - http://scheduling-us3.wfs.cloud
