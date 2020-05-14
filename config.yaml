@@ -6,6 +6,5 @@ client:
 urls:
   - http://google.com
   - http://facebook.com
-  - http://amazon.co.uk
-  - http://ebay.co.uk
-  - http://scheduling-us3.wfs.cloud
+  - http://amazon.com
+  - http://ebay.com
