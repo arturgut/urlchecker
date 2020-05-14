@@ -49,14 +49,16 @@ urls:
 * *[Completed]* - use Go routines to periodically check URL
 * *[Completed]* - Add http.client timeout 
 * *[Completed]* - Add dedicated log library
+* *[Completed]* - Add support for environment variables for port, log level, period
 
 
 ##### 0.2 
+
 * add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
 * add Dockerfile 
-* add CI/CD pipeline
-* use log library to handle logs
+
 
 ##### 0.3
-* allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
-
+* *[Todo]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
+* *[Todo]* - add tests - https://github.com/stretchr/testify
+* *[Todo]* - command line attributes for port, log level 
