@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // ScanResult - Create scan result struct
 type ScanResult struct {
@@ -16,11 +18,8 @@ func main() {
 	loadConfiguration("config.yaml") // load configuration
 
 	fmt.Println("INFO: Starting URL scanner")
-	for _, url := range config.Urls { // Main loop. For each item scan URL.
-		urlScan(url)
-	}
 
-	// Start HTTP server
-	startServer(config.Server.Port)
+	go scannerLoop()
 
+	startServer() // Start HTTP server
 }
