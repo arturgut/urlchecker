@@ -9,6 +9,9 @@ import (
 )
 
 func scannerLoop() {
+
+	fmt.Println("INFO: Starting URL scanner")
+
 	c := make(chan string)
 
 	for _, url := range config.Urls { // Main loop. For each item initiate go routine
