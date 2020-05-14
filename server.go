@@ -14,7 +14,7 @@ func metrics(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func startServer(port int) {
+func startServer() {
 	fmt.Println("INFO: Starting HTTP server on port 8090.\n You should be able to access the URL at http://localhost:8090")
 	http.HandleFunc("/metrics", metrics)
 	http.ListenAndServe(":8090", nil)
