@@ -37,13 +37,13 @@ func urlScan(url string, c chan string) { // Main urlScan function
 	elapsed := int(t.Sub(start)) / 1000 / 1000 // Convert to from date.tinme to miliseconds
 	if err != nil {
 		log.Warn("This URL is unreachable from here! ", err)
-		u[url] = ScanResult{404, 0} // Set HTTP STATUS CODE TO 404 and elapsed to '0'
-		c <- url                    // return result of scan the channel
+		scanResultsMap[url] = ScanResult{url, 404, 0} // Set HTTP STATUS CODE TO 404 and elapsed to '0'
+		c <- url                                      // return result of scan the channel
 		return
 	}
 
-	u[url] = ScanResult{resp.StatusCode, elapsed} // Add URL to global 'u' map
-	log.Debug("Added following URL to map: ", u[url], "\tCurrent map size: ", len(u))
+	scanResultsMap[url] = ScanResult{url, resp.StatusCode, elapsed} // Add URL to global 'u' map
+	log.Debug("Map updated for the following element: ", scanResultsMap[url], "\tCurrent map size: ", len(scanResultsMap))
 
 	c <- url // return result of scan the channel
 }

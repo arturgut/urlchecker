@@ -1,13 +1,16 @@
 package main
 
-// ScanResult - Create scan result struct
+// ScanResult ...
 type ScanResult struct {
-	responseCode int // also known as HTTP status code
-	durationInMs int // measured duration in ms
+	URL          string `json:"url"`
+	ResponseCode int    `json:"responseCode"` // also known as HTTP status code
+	DurationInMs int    `json:"durationInMs"` // measured duration in ms
 }
 
-var u = make(map[string]ScanResult) // Create a map of string => ScanResult
-var c = make(chan string)           // Initiate go routine channel. This needs to be globally accessible
+var scanResultsMap = map[string]ScanResult{ // initialise map with a single element
+	"google.com": {URL: "http://google.com", ResponseCode: 200, DurationInMs: 232},
+}
+var c = make(chan string) // Initiate go routine channel. This needs to be globally accessible
 
 func main() {
 
