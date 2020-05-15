@@ -1,25 +1,89 @@
-### Description
-URL checker allows to validate HTTP status and time taken to complete request for given url. Output is handled by net/http and reports results in Prometheus format.
+## Description
+URL checker allows to validate HTTP status and time taken to complete request for a given URL. Output is handled by net/http package and reports its results in Prometheus and json formats.
 
 ---
 
-### Installation 
-```
+## Installation 
+```bash
 git clone https://github.com/arturgut/urlchecker
 cd urlchecker
 git build *.go
+./main
 ```
 
-Expected output in Prometheus format:
+
+---
+## API
+
+#### '/metrics' reports in Prometheus format
+```bash
+curl http://localhost:8091/metrics
 ```
-curl http://localhost:8090/metrics
+```bash
 # HELP Version: 0.1 Alpha - https://github.com/arturgut/urlchecker
 # HELP url_checker. Label: HTTP Response code. Value: Request duration in Ms
-url_checker{ url='http://ebay.com', http_status_code=200 } 529
-url_checker{ url='http://google.com', http_status_code=200 } 104
-url_checker{ url='http://facebook.com', http_status_code=200 } 520
-url_checker{ url='http://amazon.com', http_status_code=200 } 698
+url_checker{ url='google.com', http_status_code=200 } 232
+url_checker{ url='https://google.com', http_status_code=200 } 56
+url_checker{ url='http://facebook.com', http_status_code=200 } 130
 ```
+
+### The following api endpoint are avaiable: 
+> #### /api/add - expects that URL to be passed via GET. 
+  ```bash
+    $ curl http://localhost:8091/api/add?http://testsite.local
+  ```
+  ```json
+    {
+      "google.com": { 
+          "url": "http://google.com",
+          "responseCode": 200,
+          "durationInMs": 232
+      },
+      "https://fake.local": {
+          "url": "https://fake.local",
+          "responseCode": 404,
+          "durationInMs": 0
+      }
+    }        
+
+  ```
+> #### /api/remove - removes map element using URL to be passed via GET
+  ```bash
+  $ curl http://localhost:8091/api/remove?http://google.com
+  ```
+  ```json
+  {
+      "http://testsite.local": {
+          "url": "http://testsite.local",
+          "responseCode": 404,
+          "durationInMs": 0
+      },
+      "https://fake.local": {
+          "url": "https://fake.local",
+          "responseCode": 404,
+          "durationInMs": 0
+      }
+    }        
+  ```
+> #### /api/list - Lists all map elements 
+  
+  ```bash
+  curl http://localhost:8091/api/list
+  ```
+  ```json
+  {
+      "http://testsite.local": {
+          "url": "http://testsite.local",
+          "responseCode": 404,
+          "durationInMs": 0
+      },
+      "https://fake.local": {
+          "url": "https://fake.local",
+          "responseCode": 404,
+          "durationInMs": 0
+      }
+    }    
+  ```
 
 ---
 
@@ -60,21 +124,17 @@ yaml:"period" -------> envconfig:"URL_CHECKER_PERIOD"
 * *[Completed]* - Add support for environment variables for port, log level, period
 * *[Completed]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
 * *[Completed]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
-* *[Todo]* - HTTP response should be in JSON 
-* *[Todo]* - add /api/list endpoint
+* *[Completed]* - HTTP response should be in JSON 
+* *[Completed]* - add /api/list endpoint
+
 ##### 0.2 - CI/CD 
 
 * *[Todo]* - add Dockerfile, push image to registry with commit SHA
 * *[Todo]* - add Makefile
 * *[Todo]* - add Jenkinsfile
-
-##### 0.3 - Solidifiy 
-
 * *[Todo]* - add tests - https://github.com/stretchr/testify
 
-
-##### 0.3 - Back-end for URL Checker Angular app 
-* *[Todo]* - MongoDB integration
-
 ##### Some day in the future
-* *[Ideas]* - command line attributes for port, log level 
+* *[Ideas]* - command line attributes for port, log level
+* *[Ideas]* - MongoDB integration
+* *[Ideas]* - JWT support
