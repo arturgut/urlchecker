@@ -1,5 +1,5 @@
 ### Description
-URL checker allows to validate HTTP status and time taken to complete request for give url. Output is handled by net/http as HTTP server
+URL checker allows to validate HTTP status and time taken to complete request for given url. Output is handled by net/http and reports results in Prometheus format.
 
 ---
 
@@ -52,23 +52,29 @@ yaml:"period" -------> envconfig:"URL_CHECKER_PERIOD"
 
 ### Roadmap
 
-##### 0.1 
+##### 0.1 - Initial release
 
 * *[Completed]* - use Go routines to periodically check URL
 * *[Completed]* - Add http.client timeout 
 * *[Completed]* - Add dedicated log library
 * *[Completed]* - Add support for environment variables for port, log level, period
-* *[Todo]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
+* *[Completed]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
+* *[Completed]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
+* *[Todo]* - HTTP response should be in JSON 
+* *[Todo]* - add /api/list endpoint
+##### 0.2 - CI/CD 
 
+* *[Todo]* - add Dockerfile, push image to registry with commit SHA
+* *[Todo]* - add Makefile
+* *[Todo]* - add Jenkinsfile
 
-
-##### 0.2 
-
-* *[Todo]* - add Dockerfile 
-* *[Todo]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
-
-
-##### 0.3
+##### 0.3 - Solidifiy 
 
 * *[Todo]* - add tests - https://github.com/stretchr/testify
-* *[Todo]* - command line attributes for port, log level 
+
+
+##### 0.3 - Back-end for URL Checker Angular app 
+* *[Todo]* - MongoDB integration
+
+##### Some day in the future
+* *[Ideas]* - command line attributes for port, log level 
