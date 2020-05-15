@@ -12,8 +12,6 @@ func scannerLoop() {
 
 	log.Info("Starting URL scanner")
 
-	c := make(chan string)
-
 	for _, url := range config.Urls { // Main loop. For each item initiate go routine
 		go urlScan(url, c)
 	}
@@ -45,5 +43,7 @@ func urlScan(url string, c chan string) { // Main urlScan function
 	}
 
 	u[url] = ScanResult{resp.StatusCode, elapsed} // Add URL to global 'u' map
-	c <- url                                      // return result of scan the channel
+	log.Debug("Added following URL to map: ", u[url], "\tCurrent map size: ", len(u))
+
+	c <- url // return result of scan the channel
 }
