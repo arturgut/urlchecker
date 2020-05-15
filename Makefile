@@ -1,5 +1,6 @@
+all: build run 
 build:
-	go build -o bin/urlchecker *.go
+	go build -o bin/urlchecker *.go 
 
 run:
 	go run *.go
