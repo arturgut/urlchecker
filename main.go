@@ -7,6 +7,7 @@ type ScanResult struct {
 }
 
 var u = make(map[string]ScanResult) // Create a map of string => ScanResult
+var c = make(chan string)           // Initiate go routine channel. This needs to be globally accessible
 
 func main() {
 
