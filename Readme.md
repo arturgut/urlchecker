@@ -116,25 +116,25 @@ yaml:"period" -------> envconfig:"URL_CHECKER_PERIOD"
 
 ### Roadmap
 
-##### 0.1 - Initial release
+> ##### 0.1 - Initial release
 
-* *[Completed]* - use Go routines to periodically check URL
-* *[Completed]* - Add http.client timeout 
-* *[Completed]* - Add dedicated log library
-* *[Completed]* - Add support for environment variables for port, log level, period
-* *[Completed]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
-* *[Completed]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
-* *[Completed]* - HTTP response should be in JSON 
-* *[Completed]* - add /api/list endpoint
+* *[DONE]* - use Go routines to periodically check URL
+* *[DONE]* - Add http.client timeout 
+* *[DONE]* - Add dedicated log library
+* *[DONE]* - Add support for environment variables for port, log level, period
+* *[DONE]* - add /check endpoint to allow dynamically check URL. Eg. /check?url=http:\/\/google.com
+* *[DONE]* - allow dynmically manipulate list of URL's with API. Eg. /api/add/{url} /api/remove/{url}
+* *[DONE]* - HTTP response should be in JSON 
+* *[DONE]* - add /api/list endpoint
 
-##### 0.2 - CI/CD 
+> ##### 0.2 - CI/CD 
 
-* *[Todo]* - add Dockerfile, push image to registry with commit SHA
-* *[Todo]* - add Makefile
-* *[Todo]* - add Jenkinsfile
-* *[Todo]* - add tests - https://github.com/stretchr/testify
+* *[TODO]* - add Dockerfile, push image to registry with commit SHA
+* *[DONE]* - add Makefile
+* *[TODO]* - add Jenkinsfile
+* *[TODO]* - add tests - https://github.com/stretchr/testify
 
-##### Some day in the future
-* *[Ideas]* - command line attributes for port, log level
-* *[Ideas]* - MongoDB integration
-* *[Ideas]* - JWT support
+> ##### Some day in the future
+* *[IDEAS]* - command line attributes for port, log level
+* *[IDEAS]* - MongoDB integration
+* *[IDEAS]* - JWT support
