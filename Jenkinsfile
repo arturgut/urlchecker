@@ -8,7 +8,7 @@ pipeline{
       steps {
         echo 'Building...'
         sh '''
-          make build 
+          make docker-build-dev 
         '''
       }
     }
