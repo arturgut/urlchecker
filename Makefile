@@ -31,11 +31,12 @@ docker-run-test:
 
 # Final build
 docker-compile:
-	docker run --rm --name urlchecker urlchecker-dev:latest go test
+	docker run --env GOOS=linux --env GOARCH=amd64 --rm --name urlchecker urlchecker-dev:latest go build -o bin/urlchecker-linux-amd64
 
 docker-build-final:
 	docker build -t mrsouliner/urlchecker . 
 
 docker-push: 
+	docker login -u="$(DOCKER_USER)" -p="$(DOCKER_PASS)"
 	docker push mrsouliner/urlchecker:latest
 	docker push mrsouliner/urlchecker:$(GIT_COMMIT_SHA)

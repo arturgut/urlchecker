@@ -1,7 +1,7 @@
 pipeline{
 
   agent any
-  
+ 
   stages{
     
     stage('Get Commit Details'){
@@ -43,7 +43,10 @@ pipeline{
 
     stage('Docker Push') {
       steps {
-        echo 'Not implemented yet. $GIT_COMMIT_SHA'
+        echo 'Not implemented yet.'
+        sh '''
+          make docker-push
+        '''
       }
     }
 
