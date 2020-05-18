@@ -7,18 +7,30 @@ pipeline{
     stage('Build') {
       steps {
         echo 'Building...'
+        sh '''
+          make build 
+        '''
       }
     }
 
     stage('Test') {
       steps {
         echo 'Testing...'
+        sh '''
+          make test 
+        '''
       }
     }
 
-    stage('Push To Docker Registry') {
+    stage('Docker Push') {
       steps {
-        echo 'Pushing to docker registry...'
+        echo 'Not implemented yet'
+      }
+    }
+
+    stage('Cleanup') {
+      steps {
+        echo 'Time to cleanup!'
       }
     }
 
