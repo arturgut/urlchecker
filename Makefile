@@ -20,7 +20,10 @@ docker-build-dev:
 	docker build -t urlchecker-dev -f Dockerfile.dev .
 
 docker-run-dev:
-	docker exec -it -u root jenkins /bin/bash
+	docker run mrsouliner/urlchecker:latest -d 
+
+docker-test:
+	docker exec mrsouliner/urlchecker:latest 'go test'
 
 docker-build:
 	docker build -t mrsouliner/urlchecker . 
