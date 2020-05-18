@@ -8,7 +8,7 @@ pipeline{
       steps('Get SHA') {
         sh '''
         export GIT_COMMIT_SHA=$(git log -n 1 --pretty=format:'%h')
-        echo $GIT_COMMIT_SHA
+        echo "Git commit SHA=$(GIT_COMMIT_SHA)"
         '''
       }
     }
@@ -35,6 +35,7 @@ pipeline{
       steps {
         echo 'Building...'
         sh '''
+          make compile
           make docker-build-final
         '''
       }
