@@ -13,6 +13,15 @@ pipeline{
       }
     }
 
+    stage('Run') {
+      steps {
+        echo 'Running docker image...'
+        sh '''
+          make docker-run-dev
+        '''
+      }
+    }
+
     stage('Test') {
       steps {
         echo 'Testing...'
