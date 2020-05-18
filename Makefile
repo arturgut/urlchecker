@@ -29,7 +29,7 @@ docker-run-test:
 	docker run --rm --name urlchecker urlchecker-dev:latest go test
 
 # Final build
-docker-build:
+docker-build-final:
 	docker build -t mrsouliner/urlchecker . 
 
 docker-push: 
