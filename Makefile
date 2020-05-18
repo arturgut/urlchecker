@@ -29,8 +29,12 @@ docker-run-test:
 	docker run --rm --name urlchecker urlchecker-dev:latest go test
 
 # Final build
+docker-compile:
+	docker run --rm --name urlchecker urlchecker-dev:latest go test
+
 docker-build-final:
 	docker build -t mrsouliner/urlchecker . 
 
 docker-push: 
 	docker push mrsouliner/urlchecker:latest
+	docker push mrsouliner/urlchecker:$(GIT_COMMIT_SHA)
