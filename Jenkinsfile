@@ -4,7 +4,7 @@ pipeline{
   
   stages{
     
-    stage('Build') {
+    stage('Build Dev') {
       steps {
         echo 'Building...'
         sh '''
@@ -13,20 +13,11 @@ pipeline{
       }
     }
 
-    stage('Run') {
-      steps {
-        echo 'Running docker image...'
-        sh '''
-          make docker-run-dev
-        '''
-      }
-    }
-
     stage('Test') {
       steps {
         echo 'Testing...'
         sh '''
-          make test 
+          make docker-run-test 
         '''
       }
     }

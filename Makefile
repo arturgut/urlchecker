@@ -1,4 +1,6 @@
 all: build run 
+
+# Local build
 build:
 	go build -o bin/urlchecker *.go
 	chmod +x bin/urlchecker
@@ -16,20 +18,19 @@ clean:
 test:
 	go test
 
+# Docker dev build and test
 docker-build-dev:
 	docker build -t urlchecker-dev -f Dockerfile.dev .
 
 docker-run-dev:
-	docker run mrsouliner/urlchecker:latest -d 
+	docker run urlchecker-dev:latest -d 
 
-docker-test:
-	docker exec mrsouliner/urlchecker:latest 'go test'
+docker-run-test:
+	docker run --rm --name urlchecker urlchecker-dev:latest go test
 
+# Final build
 docker-build:
 	docker build -t mrsouliner/urlchecker . 
-
-docker-run:
-	docker run -p 8091:8091 mrsouliner/urlchecker:latest
 
 docker-push: 
 	docker push mrsouliner/urlchecker:latest
