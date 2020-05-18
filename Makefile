@@ -17,10 +17,16 @@ test:
 	go test
 
 docker-build-dev:
-	docker build -t urlchecker-dev -f Dockerfile.dev . && docker run -p 8090:8090 urlchecker-dev:latest
+	docker build -t urlchecker-dev -f Dockerfile.dev .
+
+docker-run-dev:
+	docker exec -it -u root jenkins /bin/bash
 
 docker-build:
-	docker build -t mrsouliner/urlchecker . && docker run -p 8091:8091 mrsouliner/urlchecker:latest
+	docker build -t mrsouliner/urlchecker . 
+
+docker-run:
+	docker run -p 8091:8091 mrsouliner/urlchecker:latest
 
 docker-push: 
 	docker push mrsouliner/urlchecker:latest
