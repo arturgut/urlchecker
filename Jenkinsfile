@@ -4,13 +4,19 @@ pipeline{
   
   stages{
     
+    stage('Get Commit Details'){
+      steps('Get SHA') {
+        sh '''
+        export GIT_COMMIT_SHA=$(git log -n 1 --pretty=format:'%h')
+        echo $GIT_COMMIT_SHA
+        '''
+      }
+    }
+
     stage('Build Dev') {
       steps {
         echo 'Building...'
         sh '''
-          echo env.GIT_COMMIT
-          echo env.GIT_BRANCH
-          echo env.GIT_REVISION
           make docker-build-dev 
         '''
       }
@@ -36,7 +42,7 @@ pipeline{
 
     stage('Docker Push') {
       steps {
-        echo 'Not implemented yet'
+        echo 'Not implemented yet. $GIT_COMMIT_SHA'
       }
     }
 
