@@ -2,7 +2,8 @@ all: build run
 
 # Local build
 build:
-	go build -o bin/urlchecker *.go
+	/usr/local/go/bin/go get -d -v ./...
+	/usr/local/go/bin/go build -o bin/urlchecker *.go
 	chmod +x bin/urlchecker
 
 run:
