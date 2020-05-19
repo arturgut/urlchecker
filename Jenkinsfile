@@ -33,7 +33,8 @@ pipeline{
 
     stage('Docker Push Dev') {
       steps {
-        echo 'Not implemented yet.'
+        echo 'Push Dev version of container to Docker Hub'
+        sh 'printenv'
         sh '''
           make docker-push-dev
         '''
