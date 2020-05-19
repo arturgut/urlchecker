@@ -1,18 +1,15 @@
 pipeline{
 
   agent any
+  
+  environment {
+    GIT_COMMIT_SHA = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+    DOCKER_USER = credentials('docker-hub-user')
+    DOCKER_PASS = credentials('docker-hub-pass')
+  }
  
   stages{
     
-    stage('Get Commit Details'){
-      steps('Get SHA') {
-        sh '''
-        export GIT_COMMIT_SHA=$(git log -n 1 --pretty=format:'%h')
-        echo "Git commit SHA=$GIT_COMMIT_SHA"
-        '''
-      }
-    }
-
     stage('Build Dev') {
       steps {
         echo 'Building...'
@@ -25,20 +22,21 @@ pipeline{
     stage('Test') {
       steps {
         echo 'Testing...'
-        sh '''
-          make docker-run-test 
-        '''
+        sh ''' make docker-run-test '''
       }
     }
 
     stage('Docker Push Dev') {
       steps {
         echo 'Push Dev version of container to Docker Hub'
-        sh 'printenv'
-        sh '''
-          make docker-push-dev
-        '''
+        sh ''' make docker-push-dev '''
       }
     }
   }
+  post {
+        failure {
+            echo 'Push Dev version of container to Docker Hub'
+            sh 'printenv'
+        }
+    }
 }
