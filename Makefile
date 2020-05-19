@@ -21,7 +21,7 @@ test:
 
 # Docker dev build and test
 docker-build-dev:
-	docker build -t mrsouliner/urlchecker-dev -f Dockerfile.dev .
+	docker build -t mrsouliner/urlchecker-dev:latest -t mrsouliner/urlchecker-dev:$(GIT_COMMIT_SHA)  -f Dockerfile.dev .
 
 docker-run-dev:
 	docker run urlchecker-dev:latest -d 
