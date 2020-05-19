@@ -35,7 +35,7 @@ pipeline{
       steps {
         echo 'Not implemented yet.'
         sh '''
-          make docker-push
+          make docker-push-dev
         '''
       }
     }
