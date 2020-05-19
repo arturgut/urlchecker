@@ -31,17 +31,7 @@ pipeline{
       }
     }
 
-    stage('Build Final') {
-      steps {
-        echo 'Building...'
-        sh '''
-          make build
-          make docker-build-final
-        '''
-      }
-    }
-
-    stage('Docker Push') {
+    stage('Docker Push Dev') {
       steps {
         echo 'Not implemented yet.'
         sh '''
@@ -50,11 +40,13 @@ pipeline{
       }
     }
 
-    stage('Cleanup') {
+    stage('Docker Push Dev') {
       steps {
-        echo 'Time to cleanup! Currently not implemented.'
+        echo 'Not implemented yet.'
+        sh '''
+          make docker-push-dev
+        '''
       }
     }
-
   }
 }
