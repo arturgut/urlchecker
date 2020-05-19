@@ -39,14 +39,5 @@ pipeline{
         '''
       }
     }
-
-    stage('Docker Push Dev') {
-      steps {
-        echo 'Not implemented yet.'
-        sh '''
-          make docker-push-dev
-        '''
-      }
-    }
   }
 }
