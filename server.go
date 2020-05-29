@@ -117,7 +117,13 @@ func startServer() {
 }
 
 func mapToJSON() []byte {
-	data, err := json.MarshalIndent(scanResultsMap, "", "   ")
+
+	var sliceOfScanResult []ScanResult
+	for _, value := range scanResultsMap { // Convert Map of structs to slice
+		sliceOfScanResult = append(sliceOfScanResult, value)
+	}
+
+	data, err := json.MarshalIndent(sliceOfScanResult, "", "   ") // Print JSON
 	if err != nil {
 		fmt.Println("Error during marshalling")
 	}

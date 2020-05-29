@@ -134,7 +134,10 @@ yaml:"period" -------> envconfig:"URL_CHECKER_PERIOD"
 * *[TODO]* - add Jenkinsfile
 * *[TODO]* - add tests - https://github.com/stretchr/testify
 
-> ##### Some day in the future
-* *[IDEAS]* - command line attributes for port, log level
-* *[IDEAS]* - MongoDB integration
-* *[IDEAS]* - JWT support
+> ##### 0.3 - Status Sonar prep work
+* *[DONE]* - Output as JSON array 
+* *[DONE]* - Add support for CORS
+
+
+
+
