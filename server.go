@@ -21,12 +21,17 @@ func metrics(w http.ResponseWriter, r *http.Request) {
 
 func list(w http.ResponseWriter, r *http.Request) {
 	log.Debug("In /list handler")
+	enableCors(&w) // enableCors(&w)
 
 	if r.URL.Path != "/api/list" {
 		http.NotFound(w, r)
 		return
 	}
 	w.Write([]byte(mapToJSON()))
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
 
 func remove(w http.ResponseWriter, r *http.Request) {
