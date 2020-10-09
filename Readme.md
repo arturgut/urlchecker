@@ -7,7 +7,7 @@ URL checker allows to validate HTTP status and time taken to complete request fo
 ```bash
 git clone https://github.com/arturgut/urlchecker
 cd urlchecker
-git build *.go
+go run *.go
 ./main
 ```
 
